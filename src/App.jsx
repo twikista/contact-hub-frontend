@@ -35,11 +35,14 @@ const App = () => {
           path='/register'
           element={<RegisterPage addUser={handleSubmit} />}
         />
-        <Route path='/login' element={<LoginPage loginUser={handleLogin} />} />
+        <Route
+          path='/login'
+          element={<LoginPage loginUser={handleLogin} user={user} />}
+        />
         <Route
           path='/dashboard'
           element={
-            <ProtectedRoute user={user}>
+            <ProtectedRoute user={user} redirectPath='/login'>
               <Dashboard />
             </ProtectedRoute>
           }
