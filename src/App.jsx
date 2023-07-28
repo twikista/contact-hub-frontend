@@ -28,6 +28,11 @@ const App = () => {
     console.log(user)
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem(STORAGE_KEY)
+    setUser(null)
+  }
+
   return (
     <div>
       <Routes>
@@ -43,7 +48,7 @@ const App = () => {
           path='/dashboard'
           element={
             <ProtectedRoute user={user} redirectPath='/login'>
-              <Dashboard />
+              <Dashboard logout={handleLogout} />
             </ProtectedRoute>
           }
         />
