@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import userService from './services/userService'
+import contactService from './services/contactService'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
@@ -8,22 +9,28 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
   const STORAGE_KEY = 'activeuser'
-  const initialUser = () =>
-    localStorage.getItem(STORAGE_KEY)
-      ? JSON.parse(localStorage.getItem(STORAGE_KEY))
-      : null
-  const [user, setUser] = useState(initialUser)
+  const initialUser = () => {
+    const serializedUser = localStorage.getItem(STORAGE_KEY)
+    console.log(serializedUser)
+    if (!serializedUser) return null
+    const parsedUser = JSON.parse(localStorage.getItem(STORAGE_KEY))
+    contactService.setToken(parsedUser.token)
+    return parsedUser
+  }
+  const [user, setUser] = useState(initialUser())
+  const [contacts, setContacts] = useState([])
 
   console.log(user)
 
   const handleSubmit = async (userDetails) => {
-    const newUser = await userService.createUser(userDetails)
-    setUser(newUser)
+    await userService.createUser(userDetails)
+    // setUser(newUser)
   }
 
   const handleLogin = async (userCredentials) => {
     const user = await userService.loginUser(userCredentials)
     setUser(user)
+    contactService.setToken(user.token)
     window.localStorage.setItem('activeuser', JSON.stringify(user))
     console.log(user)
   }
@@ -48,7 +55,11 @@ const App = () => {
           path='/dashboard'
           element={
             <ProtectedRoute user={user} redirectPath='/login'>
-              <Dashboard logout={handleLogout} />
+              <Dashboard
+                logout={handleLogout}
+                contacts={contacts}
+                setContacts={setContacts}
+              />
             </ProtectedRoute>
           }
         />

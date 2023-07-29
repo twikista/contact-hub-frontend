@@ -3,6 +3,7 @@ import { useNavigate, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const LoginPage = ({ loginUser, user }) => {
+  console.log(user)
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')

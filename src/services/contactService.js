@@ -5,6 +5,7 @@ let token = null
 
 const setToken = (userToken) => {
   token = `Bearer ${userToken}`
+  console.log(token)
 }
 
 const setConfig = () => {
