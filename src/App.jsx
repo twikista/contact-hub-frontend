@@ -45,7 +45,7 @@ const App = () => {
       <Routes>
         <Route
           path='/register'
-          element={<RegisterPage addUser={handleSubmit} />}
+          element={<RegisterPage addUser={handleSubmit} user={user} />}
         />
         <Route
           path='/login'

@@ -24,7 +24,6 @@ const NewUserForm = ({ handleRegistration }) => {
   return (
     <div>
       <>
-        <h2>register form</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <input
