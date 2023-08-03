@@ -27,7 +27,7 @@ const App = () => {
     // setUser(newUser)
   }
 
-  const handleLogin = async (userCredentials) => {
+  const loginUser = async (userCredentials) => {
     const user = await userService.loginUser(userCredentials)
     setUser(user)
     contactService.setToken(user.token)
@@ -49,7 +49,7 @@ const App = () => {
         />
         <Route
           path='/login'
-          element={<LoginPage loginUser={handleLogin} user={user} />}
+          element={<LoginPage loginUser={loginUser} user={user} />}
         />
         <Route
           path='/dashboard'

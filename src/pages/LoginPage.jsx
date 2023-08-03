@@ -1,49 +1,20 @@
-import { useState } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import LoginForm from '../components/LoginForm'
 
 const LoginPage = ({ loginUser, user }) => {
   console.log(user)
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const userCredentials = { email, password }
-    console.log(userCredentials)
-    setEmail('')
-    setPassword('')
+  const handleLogin = (userCredentials) => {
     loginUser(userCredentials)
     navigate('/dashboard', { replace: true })
   }
-
+  if (user) return <Navigate to='/dashboard' replace />
   return (
     <>
-      {user && <Navigate to='/dashboard' replace />}
-      <div>
-        <h2>user login</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type='text'
-              placeholder='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              type='password'
-              placeholder='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type='submit'>Login</button>
-        </form>
-      </div>
+      <h2>Login</h2>
+      <LoginForm handleLogin={handleLogin} />
     </>
   )
 }
