@@ -16,7 +16,7 @@ const RegisterPage = ({ addUser, user }) => {
   return (
     <div>
       <h2>Sign up</h2>
-      <NewUserForm handleRegisteration={handleRegisteration} />
+      <NewUserForm handleRegistration={handleRegisteration} />
     </div>
   )
 }

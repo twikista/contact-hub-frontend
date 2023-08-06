@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { transformFile } from '../utils/fileTransform'
 
 const NewContactsForm = ({ addContact }) => {
   const initialState = {
@@ -12,9 +13,17 @@ const NewContactsForm = ({ addContact }) => {
     city: '',
   }
   const [contact, setContact] = useState(initialState)
+  const [contactPhoto, setContactPhoto] = useState('')
+
   const onChangeHandler = (e) => {
     const { name, value } = e.target
     setContact({ ...contact, [name]: value })
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    transformFile(file, setContactPhoto)
+    // setContactPhoto('')
   }
 
   const handleSubmit = (e) => {
@@ -22,7 +31,7 @@ const NewContactsForm = ({ addContact }) => {
     const contactObject = {
       firstName: contact.firstName,
       lastName: contact.lastName,
-      image: contact.image,
+      image: contactPhoto,
       category: contact.category,
       contactInfo: {
         phone: contact.phone,
@@ -40,6 +49,42 @@ const NewContactsForm = ({ addContact }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label
+            htmlFor='contact-photo'
+            style={{
+              borderWidth: '8px',
+              borderColor: '#ccc',
+              borderStyle: 'double',
+              width: '120px',
+              height: '120px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              // placeItems:'center',
+              borderRadius: '50%',
+              color: '#aaa',
+              overflow: 'hidden',
+            }}
+          >
+            {contactPhoto ? (
+              <img
+                src={contactPhoto}
+                style={{ width: 'inherit', height: 'inherit' }}
+              />
+            ) : (
+              'click to add photo'
+            )}
+            <input
+              type='file'
+              accept='.png, .jpeg, jpg'
+              name='contact-photo'
+              id='contact-photo'
+              style={{ visibility: 'hidden', display: 'none' }}
+              onChange={handleFileChange}
+            />
+          </label>
+        </div>
         <div>
           <input
             type='text'

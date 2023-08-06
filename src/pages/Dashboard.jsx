@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import contactService from '../services/contactService'
 import NewContactsForm from '../components/NewContactsForm'
+import ContactItem from '../components/ContactItem'
+import Avatar from '../components/Avatar'
 
-const Dashboard = ({ logout, contacts, setContacts }) => {
+const Dashboard = ({ logout, contacts, setContacts, user }) => {
   const navigate = useNavigate()
   const handleClick = () => {
     logout()
@@ -44,10 +46,15 @@ const Dashboard = ({ logout, contacts, setContacts }) => {
         >
           Logout
         </button>
+        <Avatar
+          imageURL={user.profileImage.url}
+          altText='profile image'
+          size='sm'
+        />
       </div>
       <NewContactsForm addContact={addContact} />
       {contacts.map((contact) => (
-        <div key={contact.id}>{contact.firstName}</div>
+        <ContactItem key={contact.id} contact={contact} />
       ))}
     </>
   )
@@ -59,4 +66,5 @@ Dashboard.propTypes = {
   logout: PropTypes.func,
   setContacts: PropTypes.func,
   contacts: PropTypes.array,
+  user: PropTypes.object,
 }

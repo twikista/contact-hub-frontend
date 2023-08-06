@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import Home from './pages/Home'
 
 const App = () => {
   const STORAGE_KEY = 'activeuser'
@@ -43,6 +44,7 @@ const App = () => {
   return (
     <div>
       <Routes>
+        <Route path='home' element={<Home />} />
         <Route
           path='/register'
           element={<RegisterPage addUser={handleSubmit} user={user} />}
@@ -59,6 +61,7 @@ const App = () => {
                 logout={handleLogout}
                 contacts={contacts}
                 setContacts={setContacts}
+                user={user}
               />
             </ProtectedRoute>
           }
