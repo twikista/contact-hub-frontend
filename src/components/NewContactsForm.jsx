@@ -47,7 +47,7 @@ const NewContactsForm = ({ addContact }) => {
 
   // console.log(contact)
   return (
-    <div>
+    <div style={{ backgroundColor: 'red' }}>
       <form onSubmit={handleSubmit}>
         <div>
           <label

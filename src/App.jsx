@@ -7,6 +7,8 @@ import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
+import NewContactsForm from './components/NewContactsForm'
+NewContactsForm
 
 const App = () => {
   const STORAGE_KEY = 'activeuser'
@@ -28,6 +30,11 @@ const App = () => {
     // setUser(newUser)
   }
 
+  const addContact = async (contact) => {
+    const newContact = await contactService.createContact(contact)
+    setContacts([...contacts, newContact])
+  }
+
   const loginUser = async (userCredentials) => {
     const user = await userService.loginUser(userCredentials)
     setUser(user)
@@ -42,7 +49,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className='bg-[#33332d]'>
       <Routes>
         <Route path='home' element={<Home />} />
         <Route
@@ -53,18 +60,27 @@ const App = () => {
           path='/login'
           element={<LoginPage loginUser={loginUser} user={user} />}
         />
-        <Route
-          path='/dashboard'
-          element={
-            <ProtectedRoute user={user} redirectPath='/login'>
+        <Route element={<ProtectedRoute user={user} />}>
+          <Route
+            path='dashboard'
+            element={
               <Dashboard
                 logout={handleLogout}
                 contacts={contacts}
                 setContacts={setContacts}
                 user={user}
               />
-            </ProtectedRoute>
-          }
+            }
+          >
+            <Route
+              path='new_contact'
+              element={<NewContactsForm addContact={addContact} />}
+            />
+          </Route>
+        </Route>
+        <Route
+          path='in'
+          element={<NewContactsForm addContact={addContact} />}
         />
       </Routes>
     </div>

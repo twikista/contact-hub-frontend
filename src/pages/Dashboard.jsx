@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
 import contactService from '../services/contactService'
 import NewContactsForm from '../components/NewContactsForm'
 import ContactItem from '../components/ContactItem'
-import Avatar from '../components/Avatar'
+import NavBar from '../components/NavBar'
+// import Avatar from '../components/Avatar'
+import DashboardLayout from '../components/DashboardLayout'
 
-const Dashboard = ({ logout, contacts, setContacts, user }) => {
+const Dashboard = ({ logout, contacts, setContacts, user, children }) => {
   const navigate = useNavigate()
   const handleClick = () => {
     logout()
@@ -16,6 +18,12 @@ const Dashboard = ({ logout, contacts, setContacts, user }) => {
   const addContact = async (contact) => {
     const newContact = await contactService.createContact(contact)
     setContacts([...contacts, newContact])
+  }
+
+  const deleteContact = async (id) => {
+    await contactService.deleteContact(id)
+    const filteredContacts = contacts.filter((contact) => contact.id !== id)
+    setContacts(filteredContacts)
   }
 
   useEffect(() => {
@@ -28,7 +36,7 @@ const Dashboard = ({ logout, contacts, setContacts, user }) => {
   console.log(contacts)
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h2>Dashboard</h2>
         <button
           onClick={handleClick}
@@ -51,11 +59,25 @@ const Dashboard = ({ logout, contacts, setContacts, user }) => {
           altText='profile image'
           size='sm'
         />
-      </div>
-      <NewContactsForm addContact={addContact} />
+      </div> */}
+      {/* <NavBar user={user} handleClick={handleClick} /> */}
+      <DashboardLayout user={user}>
+        <div className='text-try w-full grid grid-cols-1 grid-rows-[80px_1fr] gap-2 '>
+          <nav className='bg-ni rounded-xl'>top</nav>
+          <div className='grid grid-cols-[280px,1fr] grid-rows-1  gap-2 w-full'>
+            <div className='rounded-xl bg-ni'>h</div>
+            <right className='bg-ni rounded-xl'></right>
+          </div>
+        </div>
+      </DashboardLayout>
+      {/* <NewContactsForm addContact={addContact} />
       {contacts.map((contact) => (
-        <ContactItem key={contact.id} contact={contact} />
-      ))}
+        <ContactItem
+          key={contact.id}
+          contact={contact}
+          removeContact={deleteContact}
+        />
+      ))} */}
     </>
   )
 }
@@ -67,4 +89,5 @@ Dashboard.propTypes = {
   setContacts: PropTypes.func,
   contacts: PropTypes.array,
   user: PropTypes.object,
+  children: PropTypes.object,
 }

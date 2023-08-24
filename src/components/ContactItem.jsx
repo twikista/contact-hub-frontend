@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import man from '../assets/user.png'
 import Avatar from './Avatar'
 
-const ContactItem = ({ contact }) => {
+const ContactItem = ({ contact, removeContact }) => {
   const { contactInfo, image } = contact
   return (
-    <li key={contact.key}>
+    <li>
       <article>
         {image.url ? (
           <Avatar
@@ -28,6 +28,9 @@ const ContactItem = ({ contact }) => {
           {contactInfo.email && (
             <span style={{ display: 'block' }}>{contactInfo.email}</span>
           )}
+          <button type='button' onClick={() => removeContact(contact.id)}>
+            remove
+          </button>
         </div>
       </article>
     </li>
@@ -38,4 +41,5 @@ export default ContactItem
 
 ContactItem.propTypes = {
   contact: PropTypes.object,
+  removeContact: PropTypes.func,
 }
