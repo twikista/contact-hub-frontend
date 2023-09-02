@@ -10,7 +10,7 @@ const Home = () => {
     <div className='w-full'>
       <div className='w-full min-h-[452px] bg-primary-blue flex flex-col'>
         <header className='border-b border-b-solid border-b-gray-600'>
-          <nav className='w-[95%] sm:w-full max-w-[1560px]  mx-auto h-[70px] sm:px-6 flex justify-between items-center'>
+          <nav className='w-full sm:w-full max-w-[1560px] px-5  mx-auto h-[70px] sm:px-6 flex justify-between items-center'>
             <Link to='/' className='no-underline w-[180px]'>
               <img className='max-w-full h-auto' src={logoMobile} alt='logo' />
             </Link>
