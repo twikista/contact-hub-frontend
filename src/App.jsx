@@ -49,9 +49,9 @@ const App = () => {
   }
 
   return (
-    <div className='bg-[#33332d]'>
+    <>
       <Routes>
-        <Route path='home' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route
           path='/register'
           element={<RegisterPage addUser={handleSubmit} user={user} />}
@@ -83,7 +83,7 @@ const App = () => {
           element={<NewContactsForm addContact={addContact} />}
         />
       </Routes>
-    </div>
+    </>
   )
 }
 
