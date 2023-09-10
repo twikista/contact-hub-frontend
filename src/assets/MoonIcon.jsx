@@ -1,13 +1,13 @@
 const MoonIcon = () => {
   return (
-    <div className=' flex justify-center items-center w-7 h-7 hover:border hover:border-secondary hover:border-solid p-1 rounded'>
+    <div className=' flex justify-center items-center w-7 h-7 hover:border hover:border-accent hover:border-solid p-1 rounded'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'
         strokeWidth={1.5}
         stroke='currentColor'
-        className='w-7 h-7 text-white hover:text-secondary -rotate-[120deg] cursor-pointer'
+        className='w-7 h-7 md:w-12 md:h-12 text-white hover:text-accent -rotate-[120deg] cursor-pointer'
       >
         <path
           strokeLinecap='round'
