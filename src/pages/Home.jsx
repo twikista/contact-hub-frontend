@@ -8,7 +8,7 @@ import Logo from '../components/Logo'
 import Reviews from '../components/Reviews'
 import PropTypes from 'prop-types'
 
-const Home = ({ toggleTheme }) => {
+const Home = ({ toggleTheme, theme }) => {
   return (
     <div className='w-full bg-primary-white dark:bg-dark-bg transition-colors ease-in duration-500'>
       <div className='w-full min-h-[452px] md:min-h-[786px] bg-primary-blue flex flex-col'>
@@ -41,30 +41,11 @@ const Home = ({ toggleTheme }) => {
               </div>
             </div>
           </div>
-          {/* <div className="w-full max-w-5xl mx-auto mt-10 h-60 bg-[url('/public/header-top.png')] bg-no-repeat bg-cover"></div> */}
-          {/* <div
-            className='w-full mx-auto mt-10 h-60 flex flex-col justify-end text-primary-white'
-            style={{
-              backgroundImage: `url(${imgTop})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            <h2 className='text-xl sm:text-5xl text-center font-bold font-raleway'>
-              All you contacts in one place
-            </h2>
-            <p className='text-xs font-monserrat sm:text-2xl text-center w-8/12 mx-auto'>
-              Experience the convenience of having all your contacts
-              consolidated seamlessly in one centralized hub.
-            </p>
-          </div> */}
-          {/* <div className="w-full max-w-5xl mx-auto h-[326px] mt-12 bg-[url('./assets/header-btm.png')] bg-no-repeat bg-contain bg-center" /> */}
         </section>
       </div>
       <main>
         <section className='flex items-center flex-col-reverse pt-9  h-[608px] lg:h-[700px] gap-4 md:flex-row max-w-7xl mx-auto'>
-          <article className='flex-1 h-full text-primary-blue mx-8 md:mx-10'>
+          <article className='flex-1 h-full text-primary-blue dark:text-primary-white mx-8 md:mx-10'>
             <div className='mb-4 md:mt-40 text-center md:text-left'>
               <h2 className='text-h2  font-bold'>Why use the contactHub?</h2>
               <h4 className='text-sub-heading  font-montserrat'>
@@ -112,19 +93,27 @@ const Home = ({ toggleTheme }) => {
           </article>
           <div className='flex-1 object-cover object-center lg:object-top'>
             <img
-              src='/online-world-mobile.svg'
+              src={
+                theme
+                  ? '/online-world-mobile-dark.svg'
+                  : '/online-world-mobile.svg'
+              }
               alt='contact hub mobile image'
               className='mx-auto md:hidden h-full'
             />
             <img
-              src='/online-world-desktop.svg'
+              src={
+                theme
+                  ? '/online-world-desktop-dark.svg'
+                  : '/online-world-desktop.svg'
+              }
               alt='contact hub mobile image'
               className='mx-auto hidden md:block h-full'
             />
           </div>
         </section>
         <section className='mt-4 md:mt-14 h-48 md:h-[306px] max-w-7xl mx-auto'>
-          <h2 className='text-h2 text-center text-primary-blue font-bold leading-normal font-raleway'>
+          <h2 className='text-h2 text-center text-primary-blue dark:text-primary-white font-bold leading-normal font-raleway'>
             What other users are saying
           </h2>
           <div className='flex items-center justify-center gap-2 mt-4 md:w-80% max-w-[347px] md:max-w-4xl xl:max-w-7xl  mx-auto'>
@@ -133,7 +122,7 @@ const Home = ({ toggleTheme }) => {
             <ChevronRight />
           </div>
         </section>
-        <section className='flex  justify-center px-5 mt-6 border border-solid'>
+        <section className='flex  justify-center px-5 mt-6'>
           <article className=' w-[100%] min-w-[260px] py-6 lg:pt-9 lg:pb-14 bg-primary-blue text-primary-white text-center rounded-[10px]'>
             <div className='bg-[url("/action-bg.svg")] md:bg-[url("/action-bg-desktop.svg")] md:bg-no-repeat bg-cover'>
               <div className='w-[70%] mx-auto'>
