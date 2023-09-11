@@ -1,11 +1,32 @@
-import { Link } from 'react-router-dom'
 import Header from '../components/Header'
-import GlobeIcon from '../assets/GlobeIcon'
 import PrimaryButton from '../components/PrimaryButton'
 import { ChevronLeft, ChevronRight } from '../assets/ChevronIcons'
 import SecondaryButton from '../components/SecondaryButton'
 import Reviews from '../components/Reviews'
 import PropTypes from 'prop-types'
+import Footer from '../components/Footer'
+import HomeListItem from '../components/HomeListItem'
+
+const listItems = [
+  {
+    id: 1,
+    item: 'Unified Contact Hub',
+    point:
+      'Keep all your contacts organized in one central location for effortless management.',
+  },
+  {
+    id: 2,
+    item: 'Seamless Integration',
+    point:
+      'Sync contacts from various platforms like email and social media to maintain an up-to-date network.',
+  },
+  {
+    id: 3,
+    item: 'Effortless Communication',
+    point:
+      ' Initiate calls, emails, and messages directly from the app to stay connected without hassle.',
+  },
+]
 
 const Home = ({ toggleTheme, theme }) => {
   return (
@@ -21,42 +42,9 @@ const Home = ({ toggleTheme, theme }) => {
               </h4>
             </div>
             <ul className='list-none flex md:justify-self-auto flex-col mx-auto md:mx-0'>
-              <li className='flex gap-3 md:gap-[18px]'>
-                <GlobeIcon />
-                <div className='flex-1'>
-                  <h6 className='font-montserrat font-bold leading-normal text-regular capitalize '>
-                    Unified Contact Hub
-                  </h6>
-                  <p className='font-normal text-regular leading-normal md:max-w-[462px]'>
-                    Keep all your contacts organized in one central location for
-                    effortless management.
-                  </p>
-                </div>
-              </li>
-              <li className='flex gap-3 md:gap-[18px]'>
-                <GlobeIcon />
-                <div className='flex-1'>
-                  <h6 className='font-montserrat font-bold leading-normal text-regular capitalize'>
-                    Seamless Integration
-                  </h6>
-                  <p className='font-normal text-regular leading-normal md:max-w-[462px]'>
-                    Sync contacts from various platforms like email and social
-                    media to maintain an up-to-date network.
-                  </p>
-                </div>
-              </li>
-              <li className='flex gap-3 md:gap-[18px]'>
-                <GlobeIcon />
-                <div className='flex-1'>
-                  <h6 className='font-montserrat font-bold leading-normal text-regular capitalize'>
-                    Effortless Communication
-                  </h6>
-                  <p className='font-normal text-regular leading-normal md:max-w-[462px]'>
-                    Initiate calls, emails, and messages directly from the app
-                    to stay connected without hassle.
-                  </p>
-                </div>
-              </li>
+              {listItems.map((listItem) => (
+                <HomeListItem key={listItem.id} {...listItem} />
+              ))}
             </ul>
           </article>
           <div className='flex-1 object-cover object-center lg:object-top'>
@@ -108,20 +96,7 @@ const Home = ({ toggleTheme, theme }) => {
           </article>
         </section>
       </main>
-      <footer className=' py-5 w-full bg-primary-blue mt-12 lg:mt-16 text-sub-heading text-primary-white font-montserrat flex flex-col justify-center items-center text-center'>
-        <span>&copy;2023</span>
-        <p>
-          design:{' '}
-          <Link className='font-bold underline hover:text-accent'>
-            Moejoh Abigail
-          </Link>
-          <span>&nbsp;</span>
-          <span>&#43;</span>
-          <span>&nbsp;</span>
-          code implementation:{' '}
-          <Link className='font-bold underline hover:text-accent'>Aaron</Link>
-        </p>
-      </footer>
+      <Footer />
     </div>
   )
 }
