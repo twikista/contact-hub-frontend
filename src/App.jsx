@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import userService from './services/userService'
 import contactService from './services/contactService'
@@ -8,10 +8,27 @@ import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import NewContactsForm from './components/NewContactsForm'
-NewContactsForm
 
 const App = () => {
   const STORAGE_KEY = 'activeuser'
+  const osPreferredTheme = matchMedia('(prefers-color-scheme:dark)').matches
+  const localTheme = localStorage.getItem('theme')
+  const activeTheme = () => {
+    if (
+      localTheme === 'dark' ||
+      (!('theme' in localStorage) && osPreferredTheme)
+    ) {
+      return 'dark'
+    } else {
+      return null
+    }
+  }
+  const [theme, setTheme] = useState(activeTheme())
+  console.log(theme)
+  const toggleTheme = () => {
+    theme === 'dark' ? setTheme(null) : setTheme('dark')
+  }
+
   const initialUser = () => {
     const serializedUser = localStorage.getItem(STORAGE_KEY)
     console.log(serializedUser)
@@ -20,6 +37,7 @@ const App = () => {
     contactService.setToken(parsedUser.token)
     return parsedUser
   }
+
   const [user, setUser] = useState(initialUser())
   const [contacts, setContacts] = useState([])
 
@@ -48,10 +66,17 @@ const App = () => {
     setUser(null)
   }
 
+  useLayoutEffect(() => {
+    localStorage.setItem('theme', theme), [theme]
+  })
+
   return (
-    <>
+    <div className={theme}>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route
+          path='/'
+          element={<Home theme={theme} toggleTheme={toggleTheme} />}
+        />
         <Route
           path='/register'
           element={<RegisterPage addUser={handleSubmit} user={user} />}
@@ -83,7 +108,7 @@ const App = () => {
           element={<NewContactsForm addContact={addContact} />}
         />
       </Routes>
-    </>
+    </div>
   )
 }
 

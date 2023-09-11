@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom'
-// import logoMobile from '../assets/logo-mobile.svg'
-import MoonIcon from '../assets/MoonIcon'
+import ThemeToggler from '../components/ThemeToggler'
 import GlobeIcon from '../assets/GlobeIcon'
 import PrimaryButton from '../components/PrimaryButton'
 import { ChevronLeft, ChevronRight } from '../assets/ChevronIcons'
 import SecondaryButton from '../components/SecondaryButton'
 import Logo from '../components/Logo'
 import Reviews from '../components/Reviews'
+import PropTypes from 'prop-types'
 
-const Home = () => {
+const Home = ({ toggleTheme }) => {
   return (
-    <div className='w-full bg-primary-white'>
+    <div className='w-full bg-primary-white dark:bg-dark-bg transition-colors ease-in duration-500'>
       <div className='w-full min-h-[452px] md:min-h-[786px] bg-primary-blue flex flex-col'>
         <header className='border-b border-b-solid border-b-gray-600'>
           <nav className='w-full sm:w-full max-w-[1560px] px-5  mx-auto h-[70px] lg:h-20 sm:px-6 flex justify-between items-center'>
             <Logo />
             <div className='flex justify-end  items-center gap-5 flex-1'>
-              <MoonIcon />
+              <ThemeToggler toggleTheme={toggleTheme} />
               <span className='text-xl font-normal text-primary-white cursor-pointer hover:text-accent hover:font-bold'>
                 Login
               </span>
@@ -170,3 +170,8 @@ const Home = () => {
 }
 
 export default Home
+
+Home.propTypes = {
+  toggleTheme: PropTypes.func,
+  theme: PropTypes.string,
+}

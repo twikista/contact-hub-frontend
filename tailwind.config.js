@@ -9,6 +9,7 @@ export default {
         secondary: '#00A79D',
         'primary-white': '#FFFAEB',
         accent: '#FF6F61',
+        'dark-bg': '#2B2828',
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
